@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserUpdateDto } from 'src/auth/user-update.dto';
 import { Repository } from 'typeorm';
 import { User } from './models/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -19,11 +20,17 @@ export class UserService {
         return this.userRepository.save(data);
     }
 
-    async login(condition): Promise<User> {
-        return await this.userRepository.findOne(condition);
+    async findUser(email: any){
+        return await this.userRepository.findOne({email});
     }
 
-    async update(id, rt): Promise<any> {
-        return await this.userRepository.update(id, rt);
+    async getUserById(id: number) {
+        return await this.userRepository.findOne(id);
+    }
+
+    async update(updateDto: UserUpdateDto) {
+        return await this.userRepository.save({
+            ...updateDto
+        });
     }
 }

@@ -5,12 +5,14 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthController } from './auth/auth.controller';
 import { ProductModule } from './product/product.module';
-import { PrismaModule } from './prisma/prisma.module';
 import { AuthService } from './auth/auth.service';
 import { RtStrategy } from './auth/Jwt/rt.strategy';
 import { AtStrategy } from './auth/Jwt/at.strategy';
 import { AuthModule } from './auth/auth.module';
 import { UserService } from './user/user.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AtGuard } from './common';
+import { CartModule } from './cart/cart.module';
 
 @Module({
   imports: [
@@ -26,9 +28,16 @@ import { UserService } from './user/user.service';
     }),
     UserModule,
     ProductModule,
-    PrismaModule,
-    AuthModule],
-  controllers: [AppController, AuthController], 
-  providers: [AppService, AtStrategy, RtStrategy],
+    AuthModule,
+    CartModule,
+  ],
+  controllers: [AppController],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AtGuard,
+    },
+    AppService,
+  ],
 })
 export class AppModule {}
