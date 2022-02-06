@@ -6,7 +6,9 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
+  Res,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
@@ -21,9 +23,32 @@ import { Public } from 'src/common/decorators';
 export class ProductController {
   constructor(private productService: ProductService) {}
 
+  @Public()
   @Get()
   async all(): Promise<Product[]> {
     return await this.productService.all();
+  }
+
+  @Public()
+  @Get(':id')
+  async getProductById(@Param('id') id: number) {
+    console.log('Error :', id);
+
+    return await this.productService.findOne(id);
+
+    //create table size (product one to many size)
+  }
+
+  @Public()
+  @Get('search/:title')
+  async search(@Param('title') title: string) {
+    return await this.productService.search(title);
+  }
+
+  @Public()
+  @Get('image/:imageUri')
+  async getImageUri(@Param('imageUri') imageUri: string, @Res() res) {
+    return res.sendFile(imageUri, { root: './uploadImages/product' });
   }
 
   @Public()
@@ -34,8 +59,9 @@ export class ProductController {
         destination: './uploadImages/product',
         filename: editFilenameImage,
       }),
-      fileFilter: imageExtFilter
-    }))
+      fileFilter: imageExtFilter,
+    }),
+  )
   async createProduct(
     @Body() productDto: CreateProductDto,
     @UploadedFiles()
@@ -43,6 +69,6 @@ export class ProductController {
   ): Promise<any> {
     console.log(productDto, files);
     return await this.productService.createProduct(productDto, files);
-  //  console.log(files);
-}
+    //  console.log(files);
+  }
 }

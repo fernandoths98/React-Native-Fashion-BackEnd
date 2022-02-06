@@ -10,10 +10,9 @@ export class CartController {
   @Post()
   async addItemToCart(
     @GetCurrentUserId() userId: number,
-    @Body() addItemCartDto: AddItemCartDto
+    @Body() addItemCartDto: AddItemCartDto,
   ): Promise<any> {
-      
     // console.log({userId, addItemCartDto})
-      return this.cartService.addItemToCart(userId, addItemCartDto);
+    return this.cartService.addItemToCart(userId, addItemCartDto);
   }
 }

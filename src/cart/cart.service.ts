@@ -10,10 +10,7 @@ export class CartService {
     @InjectRepository(Cart) private readonly cartRepository: Repository<Cart>,
   ) {}
 
-  async addItemToCart(
-    userId: number,
-    addItemCartDto: AddItemCartDto,
-  ) {
+  async addItemToCart(userId: number, addItemCartDto: AddItemCartDto) {
     return await this.cartRepository.save({
       quantity: addItemCartDto.quantity,
       product: {
@@ -27,15 +24,4 @@ export class CartService {
       price: addItemCartDto.price,
     });
   }
-
-  // const addCartItem = await this.cartRepository.findOne({
-  //   where: {
-  //     product: {
-  //       id: addItemCartDto.productId,
-  //     },
-  //     user: {
-  //       id: userId,
-  //     },
-  //   },
-  // });
 }

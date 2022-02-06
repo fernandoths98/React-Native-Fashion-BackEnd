@@ -13,6 +13,7 @@ import { UserService } from './user/user.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common';
 import { CartModule } from './cart/cart.module';
+import { SizeModule } from './size/size.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CartModule } from './cart/cart.module';
     ProductModule,
     AuthModule,
     CartModule,
+    SizeModule,
   ],
   controllers: [AppController],
   providers: [
