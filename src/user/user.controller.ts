@@ -1,5 +1,9 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { Public } from 'src/common/decorators';
+import {
+  GetCurrentUser,
+  GetCurrentUserId,
+  Public,
+} from 'src/common/decorators';
 import { User } from './models/user.entity';
 import { UserService } from './user.service';
 
@@ -13,13 +17,15 @@ export class UserController {
     return await this.userService.all(); //ini balikan isi dari return
   }
 
-  @Public()
-  @Get(':id')
-  async getUserById(@Param('id') id: number) {
+  // @Public()
+  @Get('/users')
+  async getUserById(@GetCurrentUser('sub') id) {
     console.log('Error :', id);
 
     return await this.userService.getUserById(id);
 
     //create table size (product one to many size)
   }
+
+  
 }

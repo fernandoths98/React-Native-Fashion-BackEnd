@@ -14,6 +14,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common';
 import { CartModule } from './cart/cart.module';
 import { SizeModule } from './size/size.module';
+import { TransactionHistoryModule } from './transaction-history/transaction-history.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { SizeModule } from './size/size.module';
     AuthModule,
     CartModule,
     SizeModule,
+    TransactionHistoryModule,
   ],
   controllers: [AppController],
   providers: [

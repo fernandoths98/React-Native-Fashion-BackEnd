@@ -1,15 +1,17 @@
-import { IsNotEmpty } from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 
 export class AddItemCartDto {
-    @IsNotEmpty()
-    productId: number;
+  @IsNotEmpty()
+  productId: number;
 
-    @IsNotEmpty()
-    quantity: number;
+  @IsNotEmpty()
+  quantity: number;
 
-    size?: string;
+  size?: string;
 
-    image?: string;
+  title_product?: string;
 
-    price?:number;
+  image?: string;
+
+  price?: number;
 }
