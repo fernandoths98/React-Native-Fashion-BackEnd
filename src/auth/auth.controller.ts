@@ -35,7 +35,7 @@ export class AuthController {
   @Post('register')
   @HttpCode(HttpStatus.CREATED) //custom code status 200
   async register(@Body() body: RegisterDto): Promise<Tokens> {
-    console.log(body);
+    // console.log(body);
 
     return this.authService.register(body);
   }

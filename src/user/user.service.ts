@@ -24,7 +24,7 @@ export class UserService {
   }
 
   async getUserById(id: number) {
-    console.log(id);
+    // console.log(id);
     return await this.userRepository.findOne(id);
   }
 

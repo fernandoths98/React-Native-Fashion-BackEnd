@@ -1,4 +1,5 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Put } from '@nestjs/common';
+import { UserUpdateDto } from 'src/auth/user-update.dto';
 import {
   GetCurrentUser,
   GetCurrentUserId,
@@ -20,12 +21,18 @@ export class UserController {
   // @Public()
   @Get('/users')
   async getUserById(@GetCurrentUser('sub') id) {
-    console.log('Error :', id);
+    // console.log('Error :', id);
 
     return await this.userService.getUserById(id);
 
     //create table size (product one to many size)
   }
 
-  
+  @Put('/users/update/:id')
+  async updateUser(
+    @GetCurrentUserId() id,
+    @Body() userUpdateDto: UserUpdateDto,
+  ): Promise<any> {
+    return await this.userService.update(id);
+  }
 }

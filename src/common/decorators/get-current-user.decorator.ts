@@ -10,7 +10,7 @@ export const GetCurrentUser = createParamDecorator ((
             
         }
 
-        console.log(request)
+        // console.log(request)
 
         return request.user[data];
 

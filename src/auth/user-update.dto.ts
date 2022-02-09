@@ -7,6 +7,10 @@ export class UserUpdateDto {
     email?:string;
     
     password?:string;
+
+    fullName?:string;
+
+    address?:string;
     
     retypedPasswords?:string;
 

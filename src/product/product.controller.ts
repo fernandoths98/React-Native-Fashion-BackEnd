@@ -32,7 +32,7 @@ export class ProductController {
   @Public()
   @Get(':id')
   async getProductById(@Param('id') id: number) {
-    console.log('Error :', id);
+    // console.log('Error :', id);
 
     return await this.productService.findOne(id);
 
@@ -67,7 +67,7 @@ export class ProductController {
     @UploadedFiles()
     files: Array<Express.Multer.File>,
   ): Promise<any> {
-    console.log(productDto, files);
+    // console.log(productDto, files);
     return await this.productService.createProduct(productDto, files);
     //  console.log(files);
   }

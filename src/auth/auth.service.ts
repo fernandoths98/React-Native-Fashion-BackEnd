@@ -23,7 +23,7 @@ export class AuthService {
     }
     const hashedPass = await bcrypt.hash(register.password, 12);
 
-    console.log(register.password);
+    // console.log(register.password);
 
     const newUser = await this.userService.create({
       email: register.email,
